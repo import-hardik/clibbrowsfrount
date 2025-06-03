@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BrowsEdit</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- Modal Structure -->
+  <span id="logout" class="close" onclick="localStorage.clear();location.reload();" style="display: none;">Logout &times;</span>
+  <br><br>
+  <div id="editable" class="editable-area" contenteditable="true" style="display: none;min-height: 400px;">
+  </div>
+
+<div class="modal" id="loginModal" style="
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  padding: 20px;
+">
+    <div class="modal-content" >
+      <form class="form" autocomplete="off" >
+        <div class="control">
+            <h1>Sign In</h1>
+            <p>this will happen only ones</p style="padding-top:0px">
+            <br> 
+        </div>
+
+
+        <div class="control block-cube block-input">
+          <input type="text" name="username" placeholder="Username" id="userid"/>
+          <div class="bg-top"><div class="bg-inner"></div></div>
+          <div class="bg-right"><div class="bg-inner"></div></div>
+          <div class="bg"><div class="bg-inner"></div></div>
+        </div>
+
+        <div class="control block-cube block-input" id="passw">
+          <input type="password" name="password" placeholder="Password" id="pass"/>
+          <div class="bg-top"><div class="bg-inner"></div></div>
+          <div class="bg-right"><div class="bg-inner"></div></div>
+          <div class="bg"><div class="bg-inner"></div></div>
+          <div id="newa"></div>
+        </div>
+
+        <button class="btn block-cube block-cube-hover" type="button" id="submit" onclick=submitdata()>
+          <div class="bg-top"><div class="bg-inner"></div></div>
+          <div class="bg-right"><div class="bg-inner"></div></div>
+          <div class="bg"><div class="bg-inner"></div></div>
+          <div class="text">Log In</div>
+        </button>
+        <center>
+          <p id="addnew">Create Account</p style="padding-top:0px">
+            <p id="error" style="display: none;">User Name or password is incorrect </p>
+          </center>
+      </form>
+    </div>
+  </div>
+
+
+  <script src="script.js"></script>
+  <style>
+  </style>
+</body>
+</html>
