@@ -15,7 +15,7 @@ window.addEventListener('load', () => {
 
 async function ping() {
   try {
-    const response = await fetch("https://clipbrows.onrender.com");
+    const response = await fetch("https://newserv-mrot.onrender.com/");
     const data = await response.json();
     console.log("You are online");
     if (localStorage.getItem("hash") ===null){
@@ -110,7 +110,7 @@ text.addEventListener('keydown', function(event) {
 
 async function submitdata() {
   console.log("searching");
-  await fetch('https://clipbrows.onrender.com/login', {
+  await fetch('https://newserv-mrot.onrender.com/login', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -139,7 +139,7 @@ async function submitdata() {
 
 async function createnew() {
   console.log("searching- new");
-  await fetch('https://clipbrowsmain.onrender.com/newuser', {
+  await fetch('https://autoping-6jmo.onrender.com/newuser', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -169,7 +169,7 @@ async function createnew() {
 
 async function autosave() {
   console.log("Syncing"+cout);
-  await fetch('https://clipbrowsmain.onrender.com/save', {
+  await fetch('https://autoping-6jmo.onrender.com/save', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -193,7 +193,7 @@ async function autosave() {
 }
 
 async function datafill() {
-  await fetch('https://clipbrowsmain.onrender.com/cache', {
+  await fetch('https://autoping-6jmo.onrender.com/cache', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
