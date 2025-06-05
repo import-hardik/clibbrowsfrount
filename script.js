@@ -110,7 +110,7 @@ text.addEventListener('keydown', function(event) {
 
 async function submitdata() {
   console.log("searching");
-  await fetch('https://clipbrowsmain.onrender.com/login', {
+  await fetch('https://clipbrows.onrender.com/login', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -139,7 +139,7 @@ async function submitdata() {
 
 async function createnew() {
   console.log("searching- new");
-  await fetch('https://clipbrows.onrender.com/newuser', {
+  await fetch('https://clipbrowsmain.onrender.com/newuser', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -169,7 +169,7 @@ async function createnew() {
 
 async function autosave() {
   console.log("Syncing"+cout);
-  await fetch('https://clipbrows.onrender.com/save', {
+  await fetch('https://clipbrowsmain.onrender.com/save', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
@@ -193,7 +193,7 @@ async function autosave() {
 }
 
 async function datafill() {
-  await fetch('https://clipbrows.onrender.com/cache', {
+  await fetch('https://clipbrowsmain.onrender.com/cache', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
