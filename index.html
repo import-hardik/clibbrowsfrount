@@ -2,15 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>BrowsEdit</title>
+  <title>BrowsEdit:by Hardik</title>
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <!-- Modal Structure -->
-  <span id="logout" class="close" onclick="localStorage.clear();location.reload();" style="display: none;">Logout &times;</span>
-  <br><br>
+   <div class="popup" id="popup">
+          <script
+        src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+        type="module"
+      ></script>
+
+      <dotlottie-player
+        src="https://lottie.host/616d3e17-56ee-4054-926f-28d38e0b88de/IRmNUEYhtZ.lottie"
+        background="transparent"
+        speed="1"
+        style="width: 300px; height: 300px"
+        loop
+        autoplay
+      ></dotlottie-player>
+   </div>
+   <div class="span-container" id="logout" style="display: none;">
+    <h1  class="left-span"><div>
+      <h1 id ="useridname" style="display:inline;font-size: 30px;">Hardik's Clip</h1><p id="sync" style="display:inline;color: grey;"> Syncing</p>
+    </div></h1>
+    <span style="font-size: 30px;color: grey;" class="right-span" onclick="localStorage.clear();location.reload();" >&times;</span>
+   </div>
   <div id="editable" class="editable-area" contenteditable="true" style="display: none;min-height: 400px;">
   </div>
+  <div class="span-container">
+
 
 <div class="modal" id="loginModal" style="
   display: none;

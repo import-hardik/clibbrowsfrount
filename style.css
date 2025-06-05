@@ -61,7 +61,22 @@ h1 {
   font-size: 16px;
   cursor: pointer;
 }
+.span-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+}
 
+.left-span{
+  white-space: nowrap;
+  margin-top: 0px;
+
+}
+.right-span {
+  white-space: nowrap;
+
+}
 .block-cube {
   position: relative;
 }
@@ -178,4 +193,21 @@ h1 {
 
 .credits a:hover {
   opacity: 1;
+}
+
+
+/* tooltip */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.6); /* dark overlay */
+
+  display: none; /* or flex when showing */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }

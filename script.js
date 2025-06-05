@@ -5,6 +5,8 @@ const errorp = document.getElementById('error');
 const text=document.getElementById('editable');
 const modal = document.getElementById("loginModal");
 const logout = document.getElementById("logout");
+const popupl = document.getElementById("popup");
+const sync = document.getElementById("sync");
 let isonline = true;
 
 //offline is assible
@@ -14,12 +16,14 @@ window.addEventListener('load', () => {
 
 
 async function ping() {
+  openloader();
   try {
     const response = await fetch("https://newserv-mrot.onrender.com/");
     const data = await response.json();
     console.log("You are online");
     if (localStorage.getItem("hash") ===null){
       openBox();
+      closeloader();
       user.focus();
     }   
     else{
@@ -28,6 +32,7 @@ async function ping() {
     }
   } catch (error) {
     isonline=false;
+    closeloader();
     const savedText = localStorage.getItem('typedText');
     if (savedText) {
         editable.innerHTML = savedText;
@@ -39,7 +44,12 @@ async function ping() {
     console.log("you are Offline");
   }
 }
-
+function openloader() {
+  popupl.style.display = "flex";
+}
+function closeloader() {
+  popupl.style.display = "none";
+}
 
 function openBox() {
   modal.style.display = "block";
@@ -93,12 +103,29 @@ submit.addEventListener('keydown', function(event) {
     submitdata()
   }
 });
-//fix if user want to copy
+// let issyncing=false;
+// let ct=new Date();
+// function syncit(){
+//   while(true){
+//     let value=new Date();
+//     console.log("running");
+//     if (value > ct){
+//       autosave();
+//       break;
+//     }
+//   }
+//   issyncing=false;
+// }
+
 text.addEventListener('keydown', function(event) {
       if (isonline && event.key !== 'Control') {
           setTimeout(()=>{
           autosave();
         },1000);
+        // if (issyncing===false){
+        //   issyncing=true;
+        //   syncit();
+        // }
     }
     else{
       setTimeout(() => {
@@ -109,7 +136,8 @@ text.addEventListener('keydown', function(event) {
 
 
 async function submitdata() {
-  console.log("searching");
+  closeBox();
+  openloader();
   await fetch('https://newserv-mrot.onrender.com/login', {
   method: 'POST',
   headers: {
@@ -129,6 +157,8 @@ async function submitdata() {
       location.reload();
     }
     else{
+        closeloader();
+        openBox();
         document.getElementById("error").innerHTML="No Account Exist with provided username and Password"
         document.getElementById("error").style.display="block";
     }
@@ -138,7 +168,8 @@ async function submitdata() {
 }
 
 async function createnew() {
-  console.log("searching- new");
+  openloader();
+  closeBox();
   await fetch('https://autoping-6jmo.onrender.com/newuser', {
   method: 'POST',
   headers: {
@@ -152,7 +183,7 @@ async function createnew() {
 .then(response => response.json())
 .then(data =>{
     // console.log(data);
-    console.log("Processed-new");
+    closeloader();
     if (data.status==="Created"){
       localStorage.setItem("hash", data.hash);
       location.reload();
@@ -168,7 +199,9 @@ async function createnew() {
 }
 
 async function autosave() {
-  console.log("Syncing"+cout);
+  cout+=1;
+  sync.innerHTML=" Syncing...";
+  alldatasync=false;
   await fetch('https://autoping-6jmo.onrender.com/save', {
   method: 'POST',
   headers: {
@@ -183,10 +216,10 @@ async function autosave() {
 })
 .then(response => response.json())
 .then(data => 
-{
+{ 
+  // console.log(cout);
   if (data.pc==cout)
-      console.log("Syncronized"+cout);
-  cout+=1;
+      sync.innerHTML=" Synced";
 }
     )
 .catch(error => console.error('Error:', error));
@@ -205,15 +238,17 @@ async function datafill() {
 .then(response => response.json())
 .then(data => 
 {   
-    // console.log(data);
+    console.log(data);
+    document.getElementById("useridname").innerHTML=data["userid"]+"'s Clipbrows";
     if (data["status"] ==="No user"){
       localStorage.clear();
       location.reload();
     }
+    closeloader();
     text.innerHTML=data["data"];
     // console.log(data.data)
     text.style.display = "block";
-    logout.style.display = "block";
+    logout.style.display = "flex";
     text.focus();
     const range = document.createRange();
     //pata nahi kya h ye but it works
