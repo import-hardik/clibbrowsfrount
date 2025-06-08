@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>BrowsEdit:by Hardik</title>
+  <title>ClipBrows</title>
   <link rel="stylesheet" href="./style.css">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <!-- Modal Structure -->
+<body class="mt-[10px] mb-auto mx-[10px]">
    <div class="popup" id="popup">
           <script
         src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
@@ -22,16 +23,42 @@
         autoplay
       ></dotlottie-player>
    </div>
+   
+   <div class="fa-3x">
+  <i class="fa-solid fa-sync fa-spin"></i>
+  <i class="fa-solid fa-circle-notch fa-spin"></i>
+  <i class="fa-solid fa-cog fa-spin"></i>
+  <i class="fa-solid fa-cog fa-spin fa-spin-reverse"></i>
+  <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+  <i class="fa-solid fa-spinner fa-spin-pulse fa-spin-reverse"></i>
+</div>
+
    <div class="span-container" id="logout" style="display: none;">
-    <h1  class="left-span"><div>
-      <h1 id ="useridname" style="display:inline;font-size: 30px;">Hardik's Clip</h1><p id="sync" style="display:inline;color: grey;"> Syncing</p>
+    <h1 style="position: relative; display: inline-block;" class="left-span"><div>
+      <!-- <div class="loader"></div> -->
+       <div>
+          <h1 style="display:inline-block;font-size: 30px;">ClipBrows</h1>
+          <p style="display:inline-block;color: grey;" id="load">Syncing</p>
+       </div>
+      
     </div></h1>
-    <span style="font-size: 30px;color: grey;" class="right-span" onclick="localStorage.clear();location.reload();" >&times;</span>
+      <div class="relative inline-block text-left right-span">
+  <button id="menuButton" class="bg-gray-500 text-white px-4 py-2 rounded-full hover:bg-gray-700 focus:outline-none">
+    <p></p>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-40 bg-gray-500 text-white rounded-md shadow-lg z-50">
+    <p onclick="localStorage.clear();location.reload();" class="block px-4 py-2 hover:bg-gray-700 rounded-t-md">Log Out</p>
+    <p onclick="document.getElementById('editable').innerHTML='<br><br><br><br><br><br><br><br><br>';document.getElementById('dropdownMenu').classList.toggle('hidden');" class="block px-4 py-2 hover:bg-gray-700 ">Clear</p>
+    <p onclick="autosave();synca();document.getElementById('dropdownMenu').classList.toggle('hidden');" class="block px-4 py-2 hover:bg-gray-700 rounded-t-md">ManualSave</p>
+    <a href="#" class="block px-4 py-2 bg-gray-700 rounded-b-md"><center id="useridname">Hardik</center></a>
+  </div>
+</div>
    </div>
   <div id="editable" class="editable-area" contenteditable="true" style="display: none;min-height: 400px;">
   </div>
   <div class="span-container">
-
 
 <div class="modal" id="loginModal" style="
   display: none;
@@ -42,15 +69,18 @@
   z-index: 1000;
   padding: 20px;
 ">
+
     <div class="modal-content" >
       <form class="form" autocomplete="off" >
-        <div class="control">
-            <h1>Sign In</h1>
-            <p>this will happen only ones</p style="padding-top:0px">
-            <br> 
-        </div>
-
-
+        <center>
+          <h1 style="transform: scale(2)">ClipBrows</h1>
+          <p class="right-span" >By Hardik</p>
+          <br>  
+          <div class="control">
+            <!-- <h1 style="display: inline;">Sign In</h1><br> -->
+            <!-- <p style="display: inline;">Caching your Detailes</p style="padding-top:0px"> -->
+            </div>
+          </center>
         <div class="control block-cube block-input">
           <input type="text" name="username" placeholder="Username" id="userid"/>
           <div class="bg-top"><div class="bg-inner"></div></div>
@@ -72,6 +102,7 @@
           <div class="bg"><div class="bg-inner"></div></div>
           <div class="text">Log In</div>
         </button>
+        <br>
         <center>
           <p id="addnew">Create Account</p style="padding-top:0px">
             <p id="error" style="display: none;">User Name or password is incorrect </p>
@@ -82,6 +113,20 @@
 
 
   <script src="script.js"></script>
+  <script>
+      const btn = document.getElementById("menuButton");
+  const menu = document.getElementById("dropdownMenu");
+
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+
+  window.addEventListener("click", (e) => {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.add("hidden");
+    }
+  });
+  </script>
   <style>
   </style>
 </body>

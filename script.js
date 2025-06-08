@@ -8,12 +8,12 @@ const logout = document.getElementById("logout");
 const popupl = document.getElementById("popup");
 const sync = document.getElementById("sync");
 let isonline = true;
-
+const loa=document.getElementById("loadingani");
+const box=document.getElementById("loader");
 //offline is assible
 window.addEventListener('load', () => {
       ping();
     });
-
 
 async function ping() {
   openloader();
@@ -28,6 +28,7 @@ async function ping() {
     }   
     else{
         closeBox();
+        // syncaf();
         datafill();
     }
   } catch (error) {
@@ -57,6 +58,38 @@ function openBox() {
 function closeBox() {
   modal.style.display = "none";
 }
+function synca() {
+// loa.setAttribute('loop', '');loa.setAttribute('autoplay', '');loa.play();
+  document.getElementById("load").innerHTML="Syncing.."
+  // console.log("Syncing");
+}
+function syncaf() {
+  // loa.removeAttribute('loop');loa.removeAttribute('autoplay');loa.stop();
+  document.getElementById("load").innerHTML="Synced"
+  // console.log("Synced");
+}
+// function pause() {
+//     document.querySelector(".loader").style.animationPlayState = "paused";
+//   }
+
+//   function play() {
+//     document.querySelector(".loader").style.animationPlayState = "running";
+//   }
+let count = 5;
+let interval;
+function startCountdown() {
+      clearInterval(interval); // clear any previous timer
+      count = 1;
+      interval = setInterval(() => {
+        count--;
+        if (count >= 1) {
+          // console.log(count);
+        } else {
+          clearInterval(interval);
+          autosave();
+        }
+      }, 1000);
+    }
 
 
 // if (window.innerWidth <window.innerHeight)
@@ -116,11 +149,29 @@ submit.addEventListener('keydown', function(event) {
 //   }
 //   issyncing=false;
 // }
+// text.addEventListener('paste', function() {
+//   console.log("pasting");
+//   setTimeout(() => {
+//     const selection = window.getSelection();
+//     if (!selection.rangeCount) return;
 
+//     const range = selection.getRangeAt(0);
+//     const newline = document.createTextNode('\n');
+//     range.insertNode(newline);
+
+//     // Move caret after the newline
+//     range.setStartAfter(newline);
+//     range.collapse(true);
+//     selection.removeAllRanges();
+//     selection.addRange(range);
+//   }, 0);
+// });
 text.addEventListener('keydown', function(event) {
       if (isonline && event.key !== 'Control') {
+        synca();
+        // play();
           setTimeout(()=>{
-          autosave();
+          startCountdown();
         },1000);
         // if (issyncing===false){
         //   issyncing=true;
@@ -200,7 +251,7 @@ async function createnew() {
 
 async function autosave() {
   cout+=1;
-  sync.innerHTML=" Syncing...";
+  console.log("Autosaving");
   alldatasync=false;
   await fetch('https://autoping-6jmo.onrender.com/save', {
   method: 'POST',
@@ -219,7 +270,8 @@ async function autosave() {
 { 
   // console.log(cout);
   if (data.pc==cout)
-      sync.innerHTML=" Synced";
+      syncaf();
+      // pause();
 }
     )
 .catch(error => console.error('Error:', error));
@@ -239,7 +291,9 @@ async function datafill() {
 .then(data => 
 {   
     console.log(data);
-    document.getElementById("useridname").innerHTML=data["userid"]+"'s Clipbrows";
+    // pause();
+    syncaf();
+    document.getElementById("useridname").innerHTML=data["userid"];
     if (data["status"] ==="No user"){
       localStorage.clear();
       location.reload();
